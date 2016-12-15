@@ -6,8 +6,6 @@ import Data.Char
 import Control.Monad
 import Control.Applicative
 import Control.Monad (liftM, ap)
-import Data.Tuple
-
 
 newtype Parser a = Parser (String -> [(String, a)])
 
@@ -121,10 +119,7 @@ val = IntJson <$> jIntParser
 
 
 jStrParser :: Parser String
-jStrParser = readS_to_Parser reads <* whitespace
-
-readS_to_Parser :: ReadS a -> Parser a
-readS_to_Parser r = Parser (map swap . r)
+jStrParser = some (noneOf ("\n\r\"=[]{},:")) <* whitespace
 
 jIntParser :: Parser Int
 jIntParser = (some (oneOf ['0' .. '9']) >>= produce . read) <* whitespace
