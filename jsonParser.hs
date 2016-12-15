@@ -119,7 +119,7 @@ val = IntJson <$> jIntParser
 
 
 jStrParser :: Parser String
-jStrParser = some (noneOf ("\n\r=[]{},:")) <* whitespace
+jStrParser = tok "\"" *> some (noneOf ("\n\r\"=[]{},:")) <* tok "\""
 
 jIntParser :: Parser Int
 jIntParser = (some (oneOf ['0' .. '9']) >>= produce . read) <* whitespace
@@ -157,19 +157,8 @@ runParser m s =
     [([], res)] -> res
     [(xs, res)] -> error xs
 
-
---run :: String -> Value
---run = runParser val
-
-
-
---main1 = case parse (string "hello") "hello" of
---            [([], res)] -> res
---            _   -> error "Parse error on input."
-
-
-
-
+run :: String -> Value
+run s = runParser val s
 
 
 
