@@ -119,7 +119,7 @@ val = IntJson <$> jIntParser
 
 
 jStrParser :: Parser String
-jStrParser = some (noneOf ("\n\r\"=[]{},:")) <* whitespace
+jStrParser = some (noneOf ("\n\r=[]{},:")) <* whitespace
 
 jIntParser :: Parser Int
 jIntParser = (some (oneOf ['0' .. '9']) >>= produce . read) <* whitespace
