@@ -128,11 +128,7 @@ jBoolParser :: Parser Bool
 jBoolParser = ((string "False" *> produce False) <|> (string "True" *> produce True))
 
 jObjParser :: Parser [Pair]
-jObjParser = do
-    char '{'
-    jp <- jPairParser `sepBy1` (tok ",")
-    char '}'
-    produce jp
+jObjParser = tok "{" *> (jPairParser `sepBy1` (tok ",")) <* tok "}"
 
 jPairParser :: Parser (String, Value)
 jPairParser = do
