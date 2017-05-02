@@ -1,7 +1,4 @@
 
-
---http://stackoverflow.com/questions/17826616/json-parser-incorrectly-parsing-string-as-a-number
-
 import Data.Char
 import Control.Monad
 import Control.Applicative
